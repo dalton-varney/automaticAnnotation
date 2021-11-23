@@ -1,4 +1,4 @@
-# Object Detector
+# Model-Assisted Annotation
 Use [Object Detection](https://alwaysai.co/docs/application_development/core_computer_vision_services.html#object-detection) to detect objects in a real-time camera stream. The types of objects detected can be changed by selecting different models.
 
 ## Requirements
