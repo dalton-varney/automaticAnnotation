@@ -1,0 +1,35 @@
+<annotation>
+  <filename>0000294.png</filename>
+  <size>
+    <width>720</width>
+    <height>1280</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>vehicle</name>
+    <bndbox>
+      <xmin>84</xmin>
+      <ymin>91</ymin>
+      <xmax>412</xmax>
+      <ymax>361</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>vehicle</name>
+    <bndbox>
+      <xmin>414</xmin>
+      <ymin>121</ymin>
+      <xmax>707</xmax>
+      <ymax>447</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>license_plate</name>
+    <bndbox>
+      <xmin>478</xmin>
+      <ymin>245</ymin>
+      <xmax>533</xmax>
+      <ymax>290</ymax>
+    </bndbox>
+  </object>
+</annotation>
