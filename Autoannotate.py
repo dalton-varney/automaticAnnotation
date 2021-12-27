@@ -11,33 +11,32 @@ import numpy
 
 
 class AutoAnnotator(object):
-    def __init__(self, video_stream: edgeiq.FileVideoStream, detector: edgeiq.ObjectDetection, confidence_level: float,
+    def __init__(self, detector: edgeiq.ObjectDetection, confidence_level: float,
                  overlap_threshold: float, labels: List[str], markup_image: bool) -> None:
 
         self.image_index = 0
-        self.video_stream = video_stream
         self.detector = detector
         self.confidence_level = confidence_level
         self.overlap_threshold = overlap_threshold
-        for label in labels:
-            if label not in self.detector.labels:
-                raise RuntimeError(f'Label {label} is not a label {self.detector.model_id} provides')
         self.labels = labels
         self.images_path = None
         self.annotations_path = None
         self.image_sets_path = None
         self.markup_image = markup_image
 
-    def annotate(self) -> (etree._ElementTree, numpy.ndarray, str):
-        while self.video_stream.more():
-            frame = self.video_stream.read()
-            image_name = f'{self.image_index:0>7d}.png'  # Doesn't work on videos which product more than 10M images
-            results = self.detector.detect_objects(frame, confidence_level=self.confidence_level)
-            predictions = edgeiq.filter_predictions_by_label(results.predictions, self.labels)
-            annotation_xml = self._annotate_frame(frame, image_name, predictions)
-            if self.markup_image:
-                frame = edgeiq.markup_image(frame, predictions, show_confidences=False, colors=self.detector.colors)
-            yield annotation_xml, frame, image_name
+    def annotate(self, inputFrame):
+        frame = inputFrame
+        image_name = f'{self.image_index:0>7d}.png'  # Doesn't work on videos which product more than 10M images
+        results = self.detector.detect_objects(frame, confidence_level=self.confidence_level)
+        predictions = edgeiq.filter_predictions_by_label(results.predictions, self.labels)
+        annotation_xml = self._annotate_frame(frame, image_name, predictions)
+        markedUpFrame = edgeiq.markup_image(frame, predictions, show_confidences=False, colors=self.detector.colors)
+        text = []
+        text.append(f"Image: {image_name}")
+        text.append("Annotated Objects: ")
+        for prediction in predictions:
+            text.append(f"{prediction.label}")
+        return (annotation_xml, frame, image_name, markedUpFrame, text)
 
     @staticmethod
     def _annotate_frame(frame: numpy.ndarray, image_name: str,

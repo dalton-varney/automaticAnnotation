@@ -6,21 +6,21 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>vehicle</name>
+    <name>car</name>
     <bndbox>
-      <xmin>290</xmin>
-      <ymin>438</ymin>
-      <xmax>706</xmax>
-      <ymax>776</ymax>
+      <xmin>286</xmin>
+      <ymin>412</ymin>
+      <xmax>720</xmax>
+      <ymax>779</ymax>
     </bndbox>
   </object>
   <object>
-    <name>license_plate</name>
+    <name>aeroplane</name>
     <bndbox>
-      <xmin>405</xmin>
-      <ymin>545</ymin>
-      <xmax>480</xmax>
-      <ymax>590</ymax>
+      <xmin>276</xmin>
+      <ymin>409</ymin>
+      <xmax>719</xmax>
+      <ymax>782</ymax>
     </bndbox>
   </object>
 </annotation>

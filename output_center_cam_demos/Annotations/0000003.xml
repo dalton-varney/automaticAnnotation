@@ -6,12 +6,12 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>vehicle</name>
+    <name>car</name>
     <bndbox>
-      <xmin>223</xmin>
-      <ymin>404</ymin>
-      <xmax>720</xmax>
-      <ymax>734</ymax>
+      <xmin>208</xmin>
+      <ymin>367</ymin>
+      <xmax>714</xmax>
+      <ymax>753</ymax>
     </bndbox>
   </object>
 </annotation>
