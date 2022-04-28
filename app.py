@@ -14,22 +14,23 @@ from typing import List
 import zipfile
 import time
 from copy import deepcopy
-
+from helpers import *
 import cv2
 import edgeiq
 from lxml import etree
 from lxml.builder import E
-import numpy
+import numpy as np
 from Autoannotate import *
 
 """Specify your video and labels here"""
 labels = ['person', 'car']
-video_path = 'front_short.mp4'
+dataset_path = 'images/' # either a video file e.g. "video.mp4" or an folder of images e.g. "images/" within the same folder as this app.py
 confidence_level = 0.5
 overlap_threshold = 0.1
 markup_image = False
 slideShowSpeed = 0.01# Time in seconds each image is shown on streamer; set to 0 to process as fast as possible
 dataset_name = 'annotated_data'
+use_images = True #if you change this to false, you need to change the dataset_path to point to a video file
 
 
 model_id = 'alwaysai/mobilenet_ssd'
@@ -39,13 +40,17 @@ obj_detect.load(engine=edgeiq.Engine.DNN)
 
 
 def main():
-    try:
+    if use_images == True:
         auto_annotator = AutoAnnotator(obj_detect, confidence_level, overlap_threshold, labels, markup_image)
-        with edgeiq.FileVideoStream(video_path) as video_stream, edgeiq.Streamer() as streamer:
+        with edgeiq.Streamer() as streamer:
             time.sleep(2)
             auto_annotator.make_directory_structure(dataset_name)
-            while True:
-                frame = video_stream.read()
+            image_files = get_all_files(dataset_path)
+            print("going image route")
+            for i in range(len(image_files)):
+                print("annotating image", i)
+                img = cv2.imread(get_file(image_files[i], dataset_path))
+                frame = np.array(img)
                 frame2 = deepcopy(frame)
                 (annotation_xml, frame, image_name, markedUpFrame, text) = auto_annotator.annotate(frame)
                 auto_annotator.write_image(annotation_xml, frame, image_name)
@@ -53,9 +58,26 @@ def main():
                 while (time.time() - start < slideShowSpeed):
                     streamer.send_data(markedUpFrame, text)
                 auto_annotator.image_index += 1
-    except edgeiq.NoMoreFrames:
         auto_annotator.write_default_file()
         auto_annotator.zip_annotations(dataset_name)
+    else:
+        try:
+            auto_annotator = AutoAnnotator(obj_detect, confidence_level, overlap_threshold, labels, markup_image)
+            with edgeiq.FileVideoStream(video_path) as video_stream, edgeiq.Streamer() as streamer:
+                time.sleep(2)
+                auto_annotator.make_directory_structure(dataset_name)
+                while True:
+                    frame = video_stream.read()
+                    frame2 = deepcopy(frame)
+                    (annotation_xml, frame, image_name, markedUpFrame, text) = auto_annotator.annotate(frame)
+                    auto_annotator.write_image(annotation_xml, frame, image_name)
+                    start = time.time()
+                    while (time.time() - start < slideShowSpeed):
+                        streamer.send_data(markedUpFrame, text)
+                    auto_annotator.image_index += 1
+        except edgeiq.NoMoreFrames:
+            auto_annotator.write_default_file()
+            auto_annotator.zip_annotations(dataset_name)
 
 
 if __name__ == "__main__":

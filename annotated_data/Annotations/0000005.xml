@@ -1,17 +1,17 @@
 <annotation>
   <filename>0000005.png</filename>
   <size>
-    <width>720</width>
-    <height>1280</height>
+    <width>1920</width>
+    <height>1080</height>
     <depth>3</depth>
   </size>
   <object>
-    <name>car</name>
+    <name>person</name>
     <bndbox>
-      <xmin>217</xmin>
-      <ymin>350</ymin>
-      <xmax>715</xmax>
-      <ymax>767</ymax>
+      <xmin>468</xmin>
+      <ymin>341</ymin>
+      <xmax>1608</xmax>
+      <ymax>1074</ymax>
     </bndbox>
   </object>
 </annotation>

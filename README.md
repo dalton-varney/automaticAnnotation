@@ -52,11 +52,9 @@ The model id is set with the variable ```model_id```. Change this variable to th
 
 In order to train a model with your annotated dataset, open the folder ```annotated_data``` in your project. (Note: this folder will only appear after you have run the application)
 
-Select the folder ```Annotations``` and ```JPEGImages``` at the same time and choose```Compress``` or ```Zip``` on your OS system (For Mac it is right click, for Windows 10+ you may have to download unarchiver or 7zip)
+Select the ```.zip``` and upload to the alwaysAI dataset tab and begin training your model.
 
-Once your dataset has been zipped, you can upload to the alwaysAI dataset tab and begin training your model.
-
-## Uploading your dataset to CVAT
+## Uploading your dataset to CVAT for editing
 
 In order to view your annotations on CVAT or make adjustments, open the folder ```annotated_data``` in your project. (Note: this folder will only appear after you have run the application)
 
