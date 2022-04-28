@@ -22,21 +22,21 @@ from lxml.builder import E
 import numpy
 from Autoannotate import *
 
+"""Specify your video and labels here"""
+labels = ['person', 'car']
+video_path = 'front_short.mp4'
+confidence_level = 0.5
+overlap_threshold = 0.1
+markup_image = False
+slideShowSpeed = 0.01# Time in seconds each image is shown on streamer; set to 0 to process as fast as possible
+dataset_name = 'annotated_data'
+
 
 model_id = 'alwaysai/mobilenet_ssd'
-'output_center_cam_demos', 'front_short.mp4'
 
 obj_detect = edgeiq.ObjectDetection(model_id)
 obj_detect.load(engine=edgeiq.Engine.DNN)
 
-
-labels = obj_detect.labels
-confidence_level = 0.5
-overlap_threshold = 0.1
-markup_image = False
-slideShowSpeed = 1 # Time in seconds each image is shown
-dataset_name = 'output_center_cam_demos'
-video_path = 'front_short.mp4'
 
 def main():
     try:
@@ -47,7 +47,6 @@ def main():
             while True:
                 frame = video_stream.read()
                 frame2 = deepcopy(frame)
-
                 (annotation_xml, frame, image_name, markedUpFrame, text) = auto_annotator.annotate(frame)
                 auto_annotator.write_image(annotation_xml, frame, image_name)
                 start = time.time()

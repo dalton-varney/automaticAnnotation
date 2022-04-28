@@ -1,0 +1,26 @@
+<annotation>
+  <filename>0000153.png</filename>
+  <size>
+    <width>720</width>
+    <height>1280</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>car</name>
+    <bndbox>
+      <xmin>241</xmin>
+      <ymin>665</ymin>
+      <xmax>707</xmax>
+      <ymax>1012</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>car</name>
+    <bndbox>
+      <xmin>27</xmin>
+      <ymin>599</ymin>
+      <xmax>310</xmax>
+      <ymax>786</ymax>
+    </bndbox>
+  </object>
+</annotation>

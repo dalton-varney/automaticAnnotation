@@ -1,0 +1,35 @@
+<annotation>
+  <filename>0000140.png</filename>
+  <size>
+    <width>720</width>
+    <height>1280</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>car</name>
+    <bndbox>
+      <xmin>230</xmin>
+      <ymin>688</ymin>
+      <xmax>700</xmax>
+      <ymax>1019</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>car</name>
+    <bndbox>
+      <xmin>182</xmin>
+      <ymin>507</ymin>
+      <xmax>429</xmax>
+      <ymax>646</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>car</name>
+    <bndbox>
+      <xmin>32</xmin>
+      <ymin>621</ymin>
+      <xmax>311</xmax>
+      <ymax>786</ymax>
+    </bndbox>
+  </object>
+</annotation>
