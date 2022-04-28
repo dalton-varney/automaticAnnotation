@@ -31,7 +31,7 @@ To start the app:
 aai app start
 ```
 
-###Configuration Parameters
+## Configuration Parameters
 If you open the app.py function, you will see a set of parameters where you can specify video to be processed, labels, and more variables:
 ```
 labels = ['person', 'car']
@@ -44,11 +44,11 @@ dataset_name = 'annotated_data'
 ```
 SlideshowSpeed specifies how long each image shown on the streamer(localhost:5000), if you set slideShowSpeed to ```0``` then the images will be processed as fast as possible.
 
-###Changing the model
+## Changing the model
 
 The model id is set with the variable ```model_id```. Change this variable to the name of the model you would like to use and don't forget to run ```aai app models add <model_id>``` in the command line to download add model to this project.
 
-###Using your annotations to train a model
+## Using your annotations to train a model
 
 In order to train a model with your annotated dataset, open the folder ```annotated_data``` in your project. (Note: this folder will only appear after you have run the application)
 
@@ -56,7 +56,7 @@ Select the folder ```Annotations``` and ```JPEGImages``` at the same time and ch
 
 Once your dataset has been zipped, you can upload to the alwaysAI dataset tab and begin training your model.
 
-###Uploading your dataset to CVAT
+## Uploading your dataset to CVAT
 
 In order to view your annotations on CVAT or make adjustments, open the folder ```annotated_data``` in your project. (Note: this folder will only appear after you have run the application)
 
@@ -68,13 +68,13 @@ Finish creating the task/job and open the task/job.
 
 Once you have loaded into the annotation page, you should see your images ready for annotation. In the upper right select ```Menu``` then select ```Upload annotations``` and ```PASCAL VOC``` as the format.
 
-CVAT should open a file browser and you can select the zipped Annotations file you created a moment earlier. CVAT will give you a warning that uploading new annotations with erase and current annotations in that task. Since you just created a new task/job, you shouldn't have any issues and move forward with the upload. 
+CVAT should open a file browser and you can select the zipped Annotations file you created a moment earlier. CVAT will give you a warning that uploading new annotations with erase and current annotations in that task. Since you just created a new task/job, you shouldn't have any issues and move forward with the upload.
 
 
 If you have any further questions, please reach out to dalton@alwaysai.co
 
 
-###More Information
+## More Information
 To change the computer vision model, the engine and accelerator, and add additional dependencies read [this guide](https://alwaysai.co/docs/application_development/configuration_and_packaging.html).
 
 ## Support
