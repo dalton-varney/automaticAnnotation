@@ -35,12 +35,13 @@ aai app start
 If you open the app.py function, you will see a set of parameters where you can specify video to be processed, labels, and more variables:
 ```
 labels = ['person', 'car']
-video_path = 'front_short.mp4'
+dataset_path = 'images/'
 confidence_level = 0.5
 overlap_threshold = 0.1
 markup_image = False
-slideShowSpeed = 1
+slideShowSpeed = 0.01
 dataset_name = 'annotated_data'
+use_images = True
 ```
 SlideshowSpeed specifies how long each image shown on the streamer(localhost:5000), if you set slideShowSpeed to ```0``` then the images will be processed as fast as possible.
 
