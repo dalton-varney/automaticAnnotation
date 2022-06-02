@@ -8,6 +8,7 @@ import edgeiq
 from lxml import etree
 from lxml.builder import E
 import numpy
+from copy import deepcopy
 
 
 class AutoAnnotator(object):
@@ -25,12 +26,13 @@ class AutoAnnotator(object):
         self.markup_image = markup_image
 
     def annotate(self, inputFrame):
-        frame = inputFrame
-        image_name = f'{self.image_index:0>7d}.png'  # Doesn't work on videos which product more than 10M images
+        frame = deepcopy(inputFrame)
+        image_name = f'{self.image_index:0>7d}.png'  # Doesn't work on videos which produce more than 10M images
         results = self.detector.detect_objects(frame, confidence_level=self.confidence_level)
+        print(results)
         predictions = edgeiq.filter_predictions_by_label(results.predictions, self.labels)
         annotation_xml = self._annotate_frame(frame, image_name, predictions)
-        markedUpFrame = edgeiq.markup_image(frame, predictions, show_confidences=False, colors=self.detector.colors)
+        markedUpFrame = edgeiq.markup_image(inputFrame, predictions, show_confidences=False, colors=self.detector.colors)
         text = []
         text.append(f"Image: {image_name}")
         text.append("Annotated Objects: ")
@@ -85,7 +87,7 @@ class AutoAnnotator(object):
             raise FileNotFoundError('Images directory does not exist')
         if self.annotations_path is None:
             raise FileNotFoundError('Annotations directory does not exist')
-        cv2.imwrite(os.path.join(self.images_path, image_name), frame, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+        cv2.imwrite(os.path.join(self.images_path, image_name), frame, [cv2.IMWRITE_JPEG_QUALITY, 95])
         annotation_xml.write(os.path.join(self.annotations_path, f'{self.image_index:0>7d}.xml'), pretty_print=True)
 
     def write_default_file(self):

@@ -20,6 +20,7 @@ import edgeiq
 from lxml import etree
 from lxml.builder import E
 import numpy as np
+from helpers import *
 from Autoannotate import *
 
 """Specify your video and labels here"""
@@ -28,12 +29,12 @@ dataset_path = 'images/' # either a video file e.g. "video.mp4" or an folder of 
 confidence_level = 0.5
 overlap_threshold = 0.1
 markup_image = False
-slideShowSpeed = 0.01# Time in seconds each image is shown on streamer; set to 0 to process as fast as possible
+slideShowSpeed = 3# Time in seconds each image is shown on streamer; set to 0 to process as fast as possible
 dataset_name = 'annotated_data'
 use_images = True #if you change this to false, you need to change the dataset_path to point to a video file
 
 
-model_id = 'alwaysai/mobilenet_ssd'
+model_id = 'dougrien/DC-Person-detection-All'
 
 obj_detect = edgeiq.ObjectDetection(model_id)
 obj_detect.load(engine=edgeiq.Engine.DNN)
